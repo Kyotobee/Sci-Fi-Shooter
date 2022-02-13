@@ -13,6 +13,15 @@ public class PlayerMovement : MonoBehaviour
     public float maxX;
     public float minX;
 
+    public GameObject Camera;
+
+    private CameraAnimatorScript CamScript;
+
+    void Start()
+    {
+        CamScript = Camera.GetComponent<CameraAnimatorScript>();
+    }
+
     void Update()
     {
         transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
@@ -20,11 +29,11 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.RightArrow) && transform.position.x < maxX)
         {
             targetPos = new Vector2(transform.position.x + increment, transform.position.y);
-        }
-
-        if(Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.x > minX)
+            CamScript.anim.SetTrigger("CamShake");
+        } else if(Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.x > minX)
         {
             targetPos = new Vector2(transform.position.x - increment, transform.position.y);
+            CamScript.anim.SetTrigger("CamShake");
         }
     }
 }
