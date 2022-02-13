@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody2D body;
+    private Vector2 targetPos;
 
-    float horizontal;
-    float vertical;
+    public float increment;
 
-    public float runSpeed = 20.0f;
+    public float speed;
 
-    void Start ()
+    public float maxX;
+    public float minX;
+
+    void Update()
     {
-        body = GetComponent<Rigidbody2D>(); 
-    }
+        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
-    void Update ()
-    {
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical"); 
-    }
+        if(Input.GetKeyDown(KeyCode.RightArrow) && transform.position.x < maxX)
+        {
+            targetPos = new Vector2(transform.position.x + increment, transform.position.y);
+        }
 
-    private void FixedUpdate()
-    {  
-        body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+        if(Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.x > minX)
+        {
+            targetPos = new Vector2(transform.position.x - increment, transform.position.y);
+        }
     }
 }
