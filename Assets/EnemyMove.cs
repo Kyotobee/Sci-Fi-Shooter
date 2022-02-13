@@ -12,12 +12,16 @@ public class EnemyMove : MonoBehaviour
 
     public bool _canSpawnEnemy = true;
 
+    public float speed = 0.02f;
+
     void Update()
     {
         if(_canSpawnEnemy)
         {
             StartCoroutine(SpawnEnemy());
         }
+
+        transform.position = (new Vector3(transform.position.x, transform.position.y, transform.position.z - speed));
     }
 
     IEnumerator SpawnEnemy()
@@ -27,9 +31,10 @@ public class EnemyMove : MonoBehaviour
         CurrentSpawnPoint = SpawnPosition[SpawnPoint];
 
         Instantiate(Enemy, CurrentSpawnPoint, Quaternion.identity);
+
         Debug.Log(CurrentSpawnPoint.ToString());
 
-        yield return new WaitForSeconds(Random.Range(2f, 5f));
+        yield return new WaitForSeconds(Random.Range(1f, 3f));
         _canSpawnEnemy = true;
     }
 }
