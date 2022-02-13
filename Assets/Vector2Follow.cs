@@ -8,8 +8,6 @@ public class Vector2Follow : MonoBehaviour
 
     private PlayerMovement PlayerScript;
 
-    private Vector2 ExamplePos;
-
     void Start()
     {
         PlayerScript = Player.GetComponent<PlayerMovement>();
@@ -17,8 +15,6 @@ public class Vector2Follow : MonoBehaviour
 
     void Update()
     {
-        ExamplePos = new Vector2(PlayerScript.targetPos.x, 0);
-
-        transform.position = ExamplePos;
+        transform.position = PlayerScript.targetPos;
     }
 }
