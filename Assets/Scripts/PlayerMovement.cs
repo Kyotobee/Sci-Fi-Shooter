@@ -26,11 +26,11 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
-        if(Input.GetKeyDown(KeyCode.RightArrow) && transform.position.x < maxX)
+        if(Input.GetKeyDown(KeyCode.RightArrow) && transform.position.x < maxX && transform.position.x == targetPos.x)
         {
             targetPos = new Vector2(transform.position.x + increment, transform.position.y);
             CamScript.anim.SetTrigger("CamShake");
-        } else if(Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.x > minX)
+        } else if(Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.x > minX && transform.position.x == targetPos.x)
         {
             targetPos = new Vector2(transform.position.x - increment, transform.position.y);
             CamScript.anim.SetTrigger("CamShake");
