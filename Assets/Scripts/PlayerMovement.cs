@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Vector2 targetPos;
+    public Vector2 targetPos;
 
     public float increment;
 
